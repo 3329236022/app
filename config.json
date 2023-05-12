@@ -1,10 +1,10 @@
 {
     "configVersion": 2,
-    "appIdentifier": "myapp.apps",
-    "appName": "Apps",
+    "appIdentifier": "myapp.buildapp",
+    "appName": "BuildAPP",
     "bundleName": {
-        "main": "Apps",
-        "dev": "AppsDev"
+        "main": "BuildAPP",
+        "dev": "BuildAPPDev"
     },
     "deviceTarget": {
         "phone": true,
@@ -123,6 +123,6 @@
         }
     },
     "appVersion": "0.0.1",
-    "buildNumber": 3,
-    "runtimeUrl": "http://192.168.1.30:8100/"
+    "buildNumber": 1,
+    "runtimeUrl": "http://192.168.1.7:8080"
 }
