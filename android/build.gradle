@@ -25,7 +25,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        apply from: file("./mendixnative-release/mendix.gradle"); applyMendixClassPaths(project)
+        apply from: file("../node_modules/@mendix/native/android/mendix.gradle"); applyMendixClassPaths(project)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -43,16 +43,16 @@ allprojects {
                 mavenCentral()
             }
         }
-        exclusiveContent {
-            filter {
-                includeGroup "com.facebook.react"
-            }
-            forRepository {
-                maven {
-                    url "$rootDir/../node_modules/react-native/android"
-                }
-            }
-        }
+    	exclusiveContent {
+			filter {
+				includeGroup "com.facebook.react"
+			}
+			forRepository {
+				maven {
+					url "$rootDir/../node_modules/react-native/android"
+				}
+			}
+		}
         maven {
             url "$rootDir/../node_modules/react-native/android"
         }
@@ -64,20 +64,29 @@ allprojects {
         }
         google()
         mavenCentral {
-            content {
-                excludeGroup("com.facebook.react")
-            }
-        }
+			content {
+				excludeGroup("com.facebook.react")
+			}
+		}
         maven {
             url "https://maven.fabric.io/public"
         }
         maven { url "https://packages.rnd.mendix.com/jcenter" }
         maven { url "https://www.jitpack.io" }
+        maven {
+            url "https://maven.scijava.org/content/repositories/public/"
+        }
+        maven {
+            url "https://maven.scijava.org/content/repositories/jitpack/"
+        }
+        maven {
+            url "https://maven.scijava.org/content/repositories/jcenter/"
+        }
     }
 
     ext {
         // Backwards compatibility for react-native-push-notifications dependency
-        // Can be removed only if the project uses react-natice-push-notifications v7+
+        // Can be removed only if the project uses react-native-push-notifications v7+
         set("firebaseMessagingVersion", "21.0.0")
     }
 }

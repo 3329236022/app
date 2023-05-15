@@ -53,7 +53,13 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
-    ndkVersion "23.2.8568313"
+    if (System.properties['os.arch'] == "aarch64") {
+        // For M1 Users we need to use the NDK 24 which added support for aarch64
+        ndkVersion = "24.0.8215888"
+    } else {
+        // Otherwise we default to the side-by-side NDK version from AGP.
+        ndkVersion = "23.2.8568313"
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -181,7 +187,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into "libs"
 }
 
-apply from: file("../mendixnative-release/mendix.gradle");
+apply from: file("../../node_modules/@mendix/native/android/mendix.gradle");
 applyMendixGradle(project)
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
 applyNativeModulesAppBuildGradle(project)
